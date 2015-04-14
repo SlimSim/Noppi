@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Noppi - note practice for instruments",
+  "short_name": "Noppi",
+  "description": "Noppi is a great app for learning notes on a music sheet.",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+  "icons": {
+    "16": "assets/icon_16.png",
+    "128": "assets/icon_128.png"
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+This file is part of Noppi.
+
+Noppi is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Noppi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<html>
+<head>
+  <title>Noppi - note practice for instruments</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js"></script>
+</head>
+
+<body>
+
+  <object id="sheet" type="image/svg+xml" data="sheet.svg"></object>
+  
+  <div class="green">Nr of correct: <span id="nrCorrect">0</span></div>
+  <div class="red">Nr of errors: <span id="nrError">0</span></div>
+  
+  <div>
+    Clef:
+    <input
+      id="gClefButton"
+      type="button"
+      value="g-Clef" />
+    <input
+      id="fClefButton"
+      type="button"
+      value="f-Clef" />
+  </div>
+  
+  <div>
+    <p>
+      Lowest possible note:
+      <select id="lowBoundSelect">
+        <option value="0">A</option>
+        <option value="1">B</option>
+        <option value="2">C</option>
+        <option value="3">D</option>
+        <option value="4">E</option>
+        <option value="5">F</option>
+        <option value="6">G</option>
+        <option selected value="7">A</option>
+        <option value="8">B</option>
+      </select>
+    </p>
+    
+    <p>
+      Highest possible note:
+      <select id="highBoundSelect">
+        <option value="15">A</option>
+        <option value="16">B</option>
+        <option value="17">C</option>
+        <option value="18">D</option>
+        <option selected value="19">E</option>
+        <option value="20">F</option>
+        <option value="21">G</option>
+      </select>
+    </p>
+  </div>
+</body>
+</html>
