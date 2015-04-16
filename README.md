@@ -1,2 +1,2 @@
 # Noppi
-Noppi - note practice for instruments
+Noppi - note practice program for instruments
