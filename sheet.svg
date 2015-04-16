@@ -16,7 +16,7 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <svg version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    >
+    id="sheetId">
   <style>
     ellipse {
       fill-opacity: 1;

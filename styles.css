@@ -30,3 +30,39 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
 .horisontalCenter{
     align-items: center;
 }
+
+body{
+  padding: 4px 10px;
+  position: relative;
+  background: #f6f6f6;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fafafa), color-stop(0.5, #fff), color-stop(0.6, #ddd), color-stop(0.95, #FFF));
+  border-radius: 13px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+  border: 1px solid #BBB;
+  border-top-color: #CCC;
+  border-bottom-color: #999;
+  border-right-color: #AAA;
+  color:#333;
+  text-decoration:none !important;
+  -moz-box-shadow: 0 4px 4px rgba(255,255,255,.6) inset, 0px -9px 10px -4px rgba(255, 255, 255,1) inset, 0 -20px 1px -6px rgba(0, 0, 0, 0.125) inset;
+  outline: none !important;
+  
+  
+
+  background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#f0f0f0), color-stop(0.5, #eee), color-stop(0.6, #ddd), color-stop(0.95, #eee));
+
+  background: linear-gradient(147deg,#bbb, #f0f0f0, #eee);
+  
+  background: linear-gradient(147deg,#bbb, #f0f0f0, #ddd, #eee);
+  
+  /*
+  
+  -moz-box-shadow: 0 2px 2px rgba(0,0,0,.25) inset;
+  background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#f0f0f0), color-stop(0.5, #eee), color-stop(0.6, #ddd), color-stop(0.95, #eee));
+  border: 1px solid #BBB;
+  border-top-color: #999;
+  border-bottom-color: #EEE;
+  border-right-color: #999;
+  color: #111;
+  */
+  
+}
