@@ -244,7 +244,7 @@ switch(event.keyCode){
     checkAnswer('G');
     break;
   default:
-      //console.log("key " + event.keyCode);
+      //console.info("key " + event.keyCode);
       //nothing
   }// end switch
 }
