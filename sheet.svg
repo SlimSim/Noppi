@@ -33,6 +33,10 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       
   <svg x="60">
     <svg id="note">
+      <svg>
+        <text x="45" y="203" font-size="40px" display="none" id="major">#</text>
+        <text x="45" y="199" font-size="40px" display="none" id="minor">b</text>
+      </svg>
       <svg y="120" x="50">
         <ellipse cx="12" cy="76" rx="12" ry="10" transform="rotate(-15)"/>
         <line id="noteLineDown" x1="20" y1="70" x2="20" y2="140" dx="0" />
@@ -47,6 +51,11 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
     <svg y="210" id="oneUnder" ><line x1="65" y1="10" x2="97" y2="10" /></svg>
     <svg y="230" id="twoUnder" ><line x1="65" y1="10" x2="97" y2="10" /></svg>
   </svg>
+    
+  <svg y="90">
+    <text x="130" y="20" font-size="25px" display="none" id="chordLetter">A</text>
+  </svg>  
+    
     
   <svg y="100">
     <path d="M5 20  l215 0" />

@@ -47,34 +47,52 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       value="Chord" />
 -->
   </div>
-  
+  <!--
+  <div>
+    <label>
+      <input type="radio" name="mode" value="note">Notes
+    </label>
+    <label>
+      <input type="radio" name="mode" value="chord" checked/>Chords
+    </label>
+  </div>
+  -->
   <div>
     <p>
       Lowest possible note:
       <select id="lowBoundSelect">
-        <option value="0">A</option>
-        <option value="1">B</option>
-        <option value="2">C</option>
-        <option value="3">D</option>
-        <option value="4">E</option>
-        <option value="5">F</option>
-        <option value="6">G</option>
-        <option selected value="7">A</option>
-        <option value="8">B</option>
+        <option value="9">Lo A</option>
+        <option value="11">Lo B</option>
+        <option value="12">Lo C</option>
+        <option value="14">Lo D</option>
+        <option value="16">Lo E</option>
+        <option value="17">Lo F</option>
+        <option value="19">Lo G</option>
+        <option selected value="21">A</option>
+        <option value="23">B</option>
       </select>
     </p>
     
     <p>
       Highest possible note:
       <select id="highBoundSelect">
-        <option value="15">A</option>
-        <option value="16">B</option>
-        <option value="17">C</option>
-        <option value="18">D</option>
-        <option selected value="19">E</option>
-        <option value="20">F</option>
-        <option value="21">G</option>
+        <option value="33">Hi A</option>
+        <option value="35">Hi B</option>
+        <option value="36">Hi C</option>
+        <option value="37">Hi D</option>
+        <option selected value="40">Hi E</option>
+        <option value="41">Hi F</option>
+        <option value="43">Hi G</option>
       </select>
+    </p>
+  </div>
+  <div>
+    <p>
+      Type the letter of the tone shown, use Shift for Major and Alt for minor.
+    </p>
+    <p>
+      You can also hit the number corresponding to the correct 
+      trombone slider position.
     </p>
   </div>
 </body>
