@@ -84,15 +84,7 @@ Note.prototype.getName = function(flat){
 Note.prototype.isNote = function(freq){
   if(Number.isInteger(freq))
     return this.frequency === freq;
-//freq = freq.toUpperCase();
-  console.log("freq    = " + freq);
-  console.log("getName = " + this.getName(false) );
-  console.log("getName = " + this.getName(true) );
   return this.getName(false) === freq || this.getName(true) === freq;
-};
-Note.prototype.isNoteName = function(name){
-  
-  return this.getName(false) === name || this.getName(true) === name;
 };
 
 
@@ -271,80 +263,77 @@ function setNote(oNote){
  
   resetNote();
 
-  var noteYValue = 0;
+  var y = 0; //noteYValue
   
   var bB = Math.random() < 0.5;
 
   
   var extra = "";
   switch(oNote.frequency){
-    case 9:  noteYValue = 140;     extra = ""; break; // Lo A
-    case 10: if(bB){noteYValue = 130; extra = "b"; }else{noteYValue = 140; extra = "#"; } break;
-    case 11: noteYValue = 130;   extra = ""; break; // Lo B
-    case 12: noteYValue = 120;   extra = ""; break; // Lo C
-    case 13: if(bB){noteYValue = 110; extra = "b"; }else{noteYValue = 120; extra = "#";} break;
-    case 14: noteYValue = 110;   extra = ""; break; // Lo D
-    case 15: if(bB){noteYValue = 100; extra = "b"; }else{noteYValue = 110; extra = "#";} break;
-    case 16: noteYValue = 100;   extra = ""; break; // Lo E
-    case 17: noteYValue = 90;   extra = ""; break; // Lo F
-    case 18: if(bB){noteYValue = 80; extra = "b";  }else{noteYValue = 90; extra = "#";} break;
-    case 19: noteYValue = 80;   extra = ""; break; // Lo G
-    case 20: if(bB){noteYValue = 70;  extra = "b"; }else{noteYValue = 80; extra = "#";} break;
-    case 21: noteYValue = 70;    extra = ""; break; // A
-    case 22: if(bB){noteYValue = 60; extra = "b";  }else{noteYValue = 70; extra = "#"; } break;
-    case 23: noteYValue = 60;  extra = ""; break; // B
-    case 24: noteYValue = 50;   extra = ""; break; // C
-    case 25: if(bB){noteYValue = 40; extra = "b";  }else{noteYValue = 50; extra = "#";} break;
-    case 26: noteYValue = 40;   extra = ""; break; // D
-    case 27: if(bB){noteYValue = 30; extra = "b";  }else{noteYValue = 40; extra = "#";} break;
-    case 28: noteYValue = 30;   extra = ""; break; // E
-    case 29: noteYValue = 20;   extra = ""; break; // F
-    case 30: if(bB){noteYValue = 10; extra = "b";  }else{noteYValue = 20; extra = "#";} break;
-    case 31: noteYValue = 10;   extra = ""; break; // G
-    case 32: if(bB){noteYValue = 0;  extra = "b";  }else{noteYValue = 10; extra = "#";} break;
-    case 33: noteYValue = 0;    extra = ""; break; // Hi A
-    case 34: if(bB){noteYValue = -10; extra = "b"; }else{noteYValue = 0; extra = "#"; } break;
-    case 35: noteYValue = -10;  extra = ""; break; // Hi B
-    case 36: noteYValue = -20;   extra = ""; break; // Hi C
-    case 37: if(bB){noteYValue = -30; extra = "b";  }else{noteYValue = -20; extra = "#";} break;
-    case 38: noteYValue = -30;   extra = ""; break; // Hi D
-    case 39: if(bB){noteYValue = -40; extra = "b";  }else{noteYValue = -30; extra = "#";} break;
-    case 40: noteYValue = -40;   extra = ""; break; // Hi E
-    case 41: noteYValue = -50;   extra = ""; break; // Hi F
-    case 42: if(bB){noteYValue = -60; extra = "b";  }else{noteYValue = -50; extra = "#";} break;
-    case 43: noteYValue = -60;   extra = ""; break; // Hi G
-    case 44: if(bB){noteYValue = -70;  extra = "b";  }else{noteYValue = -60; extra = "#";} break;
-    case 45: noteYValue = -70;    extra = ""; break; // Hihi A
-    case 46: if(bB){noteYValue = -80; extra = "b"; }else{noteYValue = -70; extra = "#"; } break;
-    case 47: noteYValue = -80;  extra = ""; break; // Hihi B
+    case 9:  y = 140; extra = ""; break; // Lo A
+    case 10: if(bB){y = 130; extra = "b"; }else{y = 140;  extra = "#";} break;
+    case 11: y = 130; extra = ""; break; // Lo B
+    case 12: y = 120; extra = ""; break; // Lo C
+    case 13: if(bB){y = 110; extra = "b"; }else{y = 120;  extra = "#";} break;
+    case 14: y = 110; extra = ""; break; // Lo D
+    case 15: if(bB){y = 100; extra = "b"; }else{y = 110;  extra = "#";} break;
+    case 16: y = 100; extra = ""; break; // Lo E
+    case 17: y = 90;  extra = ""; break; // Lo F
+    case 18: if(bB){y = 80;  extra = "b"; }else{y = 90;   extra = "#";} break;
+    case 19: y = 80;  extra = ""; break; // Lo G
+    case 20: if(bB){y = 70;  extra = "b"; }else{y = 80;   extra = "#";} break;
+    case 21: y = 70;  extra = ""; break; // A
+    case 22: if(bB){y = 60;  extra = "b"; }else{y = 70;   extra = "#";} break;
+    case 23: y = 60;  extra = ""; break; // B
+    case 24: y = 50;  extra = ""; break; // C
+    case 25: if(bB){y = 40;  extra = "b"; }else{y = 50;   extra = "#";} break;
+    case 26: y = 40;  extra = ""; break; // D
+    case 27: if(bB){y = 30;  extra = "b"; }else{y = 40;   extra = "#";} break;
+    case 28: y = 30;  extra = ""; break; // E
+    case 29: y = 20;  extra = ""; break; // F
+    case 30: if(bB){y = 10;  extra = "b"; }else{y = 20;   extra = "#";} break;
+    case 31: y = 10;  extra = ""; break; // G
+    case 32: if(bB){y = 0;   extra = "b"; }else{y = 10;   extra = "#";} break;
+    case 33: y = 0;   extra = ""; break; // Hi A
+    case 34: if(bB){y = -10; extra = "b"; }else{y = 0;    extra = "#";} break;
+    case 35: y = -10; extra = ""; break; // Hi B
+    case 36: y = -20; extra = ""; break; // Hi C
+    case 37: if(bB){y = -30; extra = "b"; }else{y = -20;  extra = "#";} break;
+    case 38: y = -30; extra = ""; break; // Hi D
+    case 39: if(bB){y = -40; extra = "b"; }else{y = -30;  extra = "#";} break;
+    case 40: y = -40; extra = ""; break; // Hi E
+    case 41: y = -50; extra = ""; break; // Hi F
+    case 42: if(bB){y = -60; extra = "b"; }else{y = -50;  extra = "#";} break;
+    case 43: y = -60; extra = ""; break; // Hi G
+    case 44: if(bB){y = -70; extra = "b"; }else{y = -60;  extra = "#";} break;
+    case 45: y = -70; extra = ""; break; // Hihi A
+    case 46: if(bB){y = -80; extra = "b"; }else{y = -70;  extra = "#";} break;
+    case 47: y = -80; extra = ""; break; // Hihi B
   }
-  noteYValue -= 70;
+  y -= 70;
 
-  if(gCurrentClef == 'g') noteYValue += 50;
+  if(gCurrentClef == 'g') y += 50;
   
   if(extra === '#')
     major.setAttribute("display", '');
   if(extra === 'b')
     minor.setAttribute("display", '');
 
-  if(noteYValue > -25) {
+  if(y > -25) {
     noteLineUp.setAttribute("display", '');
     noteLineDown.setAttribute("display", 'none');
   }else{
     noteLineUp.setAttribute("display", 'none');
     noteLineDown.setAttribute("display", '');
   }
-  if(noteYValue <= -130)  threeOver.setAttribute('display', '');
-  if(noteYValue <= -110)  twoOver.setAttribute('display', '');
-  if(noteYValue <= -90)   oneOver.setAttribute('display', '');
-  if(noteYValue >= 30)    oneUnder.setAttribute('display', '');
-  if(noteYValue >= 50)    twoUnder.setAttribute('display', '');
+  if(y <= -130)  threeOver.setAttribute('display', '');
+  if(y <= -110)  twoOver.setAttribute('display', '');
+  if(y <= -90)   oneOver.setAttribute('display', '');
+  if(y >= 30)    oneUnder.setAttribute('display', '');
+  if(y >= 50)    twoUnder.setAttribute('display', '');
 
-  note.setAttribute("y", noteYValue);
+  note.setAttribute("y", y); //noteYValue
   
-  console.log("oNote:");
-  console.log(oNote);
-  console.log(oNote.getName());
   gCorrectAnswer = oNote;
   
 }
