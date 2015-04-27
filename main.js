@@ -211,9 +211,7 @@ function randomNote(){
 }
 
 
-//TODO: det blir fel när man kör setNote(23) vilket är ett lågt B, som 
 function setChorde(chord){
-//  chord = chord.toUpperCase();
   var chordPos = gaChord.indexOf(chord);
   if(chordPos == -1)
     return;
@@ -264,10 +262,7 @@ function setNote(oNote){
   resetNote();
 
   var y = 0; //noteYValue
-  
   var bB = Math.random() < 0.5;
-
-  
   var extra = "";
   switch(oNote.frequency){
     case 9:  y = 140; extra = ""; break; // Lo A
@@ -425,6 +420,22 @@ window.onload = function() {
   document.addEventListener('keydown', keyboardKeydown);
   document.getElementById('gClefButton').addEventListener('click', setGClef);
   document.getElementById('fClefButton').addEventListener('click', setFClef);
+  
+  
+  /*  why o why does not this work?
+    $('.shareClass').click(function(){
+    
+      console.info("shareClass ->");
+    }, false);
+    $('#sheetId').click(function(){
+      console.info("333");
+    })
+  */
+  setInterval(blurHackFunk,1000);
 };
-
+function blurHackFunk(){document.getElementById('blur-hack').focus();}
+/* 
+  Supprisingly, this hack - both the interval and the blur-hack - does
+  not seem to take any reasourses other that when they where being used!
+*/
 
