@@ -158,7 +158,7 @@ person.speak(); // alerts "Howdy, my name is Bob"
 var gCorrectAnswer = new Note(0);
 var gCurrentAnswer = [];
 var gCurrentClef = 'g'; //g (normal) or f (bas)
-
+var gaCurrentChords = [];
 var gaChords = [
   new Chord('A', [new Note('A'), new Note('C#'), new Note('E')] ),
   new Chord('Am', [new Note('A'), new Note('C'), new Note('E')] ),
@@ -196,7 +196,7 @@ function setGClef(){
   
   gCurrentClef = 'g';
   setNote(gCorrectAnswer);
-}
+} 
 function setFClef(){
   var svg = document.getElementById("sheet");
   var svgDoc = svg.contentDocument;
@@ -261,10 +261,19 @@ function checkAnswer(/* int or char */ answer){
 function randomNote(){
   // if Chord practice:
   if(document.getElementById('radChord').checked){
-    var chordPos = Math.floor(Math.random()* (gaChords.length) );
-    setChorde(gaChords[chordPos]);
-  } else {
+/*
+    var randChordPos;
     
+    do{
+      randChordPos = Math.floor(Math.random()* (gaCurrentChords.length) );
+    }while(gaCurrentChords[randChordPos] == gCorrectAnswer);
+*/
+    // fixa så att man inte kan få samma acord i rad....
+    
+    var chordPos = Math.floor(Math.random()* (gaCurrentChords.length) );
+    setChorde(gaCurrentChords[chordPos]);
+  } else {
+    var randFreq;
     var lowFreq = parseInt(document.querySelector('#lowBoundSelect').value);
     var highFreq = parseInt(document.querySelector('#highBoundSelect').value);
     do{
@@ -277,7 +286,7 @@ function randomNote(){
 
 
 function setChorde(chord){
-  var chordPos = gaChords.indexOf(chord);
+  var chordPos = gaCurrentChords.indexOf(chord);
   if(chordPos == -1)
     return;
     
@@ -436,6 +445,49 @@ function resetNote(){
 
 }
 
+function makeChordArray(){
+  var domChords = document.querySelectorAll('#chordPicker label input');
+  
+  var chords = [];
+  
+  for(var i=0; i<domChords.length; i++){
+    if(domChords[i].checked) chords.push(gaChords[i]);
+  }
+  
+  if(chords.length < 2){
+    document.querySelectorAll('#chordPicker input')[1].checked = true;
+    document.querySelectorAll('#chordPicker input')[4].checked = true;
+    return makeChordArray();
+  }
+  
+  gaCurrentChords = chords;
+  
+}
+
+// function used at startUp to fill the HTML
+function fillChords(){
+  for(var i=0; i<gaChords.length; i++){
+    var input = document.createElement('input');
+    var label = document.createElement('label');
+    input.type="checkbox";
+    if(i==1 || i==4) input.checked = true;
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(gaChords[i].name));
+    label.addEventListener('click', makeChordArray);
+    document.getElementById('chordPicker').appendChild(label);
+  }
+}
+
+function showHideChords(){
+  if(document.getElementById('radChord').checked){
+    document.getElementById('notePicker').style.display = "none";
+    document.getElementById('chordPicker').style.display = "";
+  } else {
+    document.getElementById('notePicker').style.display = "";
+    document.getElementById('chordPicker').style.display = "none";
+  }
+}
+
 
 function keyboardKeydown(event){
   
@@ -485,6 +537,9 @@ switch(event.keyCode){
 
 window.onload = function() {
   randomNote();
+  fillChords();
+  showHideChords();
+  makeChordArray();
   setGClef();
   document.addEventListener('keydown', keyboardKeydown);
   document.getElementById('gClefButton').addEventListener('click', setGClef);
@@ -494,6 +549,7 @@ window.onload = function() {
   var aElements = document.querySelectorAll('.radMode');
   for(var i=0; i<aElements.length; i++){
     aElements[i].addEventListener('click', randomNote, false);
+    aElements[i].addEventListener('click', showHideChords, false);
   }
 
   

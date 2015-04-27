@@ -54,13 +54,13 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
   </div>
   <div>
     <label>
-      <input id="radNote" class="radMode" type="radio" name="mode" value="note">Notes
+      <input id="radNote" class="radMode" type="radio" name="mode" value="note" checked>Notes
     </label>
     <label>
-      <input id="radChord" class="radMode" type="radio" name="mode" value="chord" checked/>Chords
+      <input id="radChord" class="radMode" type="radio" name="mode" value="chord"/>Chords
     </label>
   </div>
-  <div>
+  <div id="notePicker">
     <p>
       Lowest possible note:
       <select id="lowBoundSelect">
@@ -89,13 +89,15 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       </select>
     </p>
   </div>
+  <div id="chordPicker">
+  </div>
   <div>
     <p>
       Type the letter of the tone shown, use Shift for Major and Alt for minor.
     </p>
     <p>
       You can also hit the number corresponding to the correct 
-      trombone slide position.
+      trombone slide position (this feature does not with chords).
     </p>
   </div>
 </body>

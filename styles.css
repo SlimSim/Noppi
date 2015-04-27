@@ -31,6 +31,10 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
     align-items: center;
 }
 
+label{
+  display: inline-block;
+}
+
 body{
   padding: 4px 10px;
   position: relative;
