@@ -101,16 +101,43 @@ function Chord(name, notes){
   });
   
   this.notes = notes;
+  this.name = name;
 }
 // Add methods like this.  All Person objects will be able to invoke this
 Chord.prototype.getName = function(){
   return this.name;
 };
 Chord.prototype.hasNote = function(note){
-//  note = note.toUpperCase();
-  var pos = this.notes.indexOf(note);
-  if(pos == -1) return false;
-  else return true;
+  var res = false;
+  this.notes.forEach(function(oNote){
+    if(note.getName() == oNote.getName() ){ 
+      res = true;
+    }
+  });
+  return res;
+};
+Chord.prototype.is = function(astrNotes){
+/*
+  if(astrNotes.length != this.notes.length)
+    return false;
+*/  
+  var res = true;
+  this.notes.forEach(function(oNote){
+    if(
+      astrNotes.indexOf(oNote.getName(true)) == -1 &&
+      astrNotes.indexOf(oNote.getName(false)) == -1
+    ){ 
+      res = false;
+    }
+  });
+  
+  var that = this;
+  astrNotes.forEach(function(strNote){
+    if(!that.hasNote(new Note(strNote) ))
+      res = false;
+  });
+  
+  return res;
 };
 
 
@@ -129,7 +156,27 @@ person.speak(); // alerts "Howdy, my name is Bob"
 
 
 var gCorrectAnswer = new Note(0);
+var gCurrentAnswer = [];
 var gCurrentClef = 'g'; //g (normal) or f (bas)
+
+var gaChords = [
+  new Chord('A', [new Note('A'), new Note('C#'), new Note('E')] ),
+  new Chord('Am', [new Note('A'), new Note('C'), new Note('E')] ),
+  new Chord('B', [new Note('B'), new Note('D#'), new Note('F#')] ),
+  new Chord('Bb', [new Note('Bb'), new Note('D'), new Note('F')] ),
+  new Chord('C', [new Note('C'), new Note('E'), new Note('G')] ),
+  new Chord('Cm', [new Note('C'), new Note('D#'), new Note('G')] ),
+  new Chord('C#', [new Note('C#'), new Note('F'), new Note('G#')] ),
+  new Chord('D', [new Note('D'), new Note('F#'), new Note('A')] ),
+  new Chord('Dm', [new Note('D'), new Note('F'), new Note('A')] ),
+  new Chord('E', [new Note('E'), new Note('G#'), new Note('B')] ),
+  new Chord('Em', [new Note('E'), new Note('G'), new Note('B')] ),
+  new Chord('Eb', [new Note('Eb'), new Note('F#'), new Note('A#')] ),
+  new Chord('Ebm', [new Note('Eb'), new Note('F'), new Note('A#')] ),
+  new Chord('F', [new Note('F'), new Note('A'), new Note('C')] ),
+  new Chord('G', [new Note('G'), new Note('B'), new Note('D')] ),
+  new Chord('Gm', [new Note('G'), new Note('Bb'), new Note('D')] )
+];
 
 var gTrombone = new Trombone();
 
@@ -178,41 +225,59 @@ function checkAnswer(/* int or char */ answer){
   
   // typing trombone possition:
   if( Number.isInteger(answer) ){
-    if( gTrombone.doesNoteAndPositionMatch(gCorrectAnswer, answer) ){
-      document.querySelector('#nrCorrect').innerHTML++;
-      return randomNote();
+    if(document.getElementById('radChord').checked){
+      return;
+    } else {
+      if( gTrombone.doesNoteAndPositionMatch(gCorrectAnswer, answer) ){
+        document.querySelector('#nrCorrect').innerHTML++;
+        return randomNote();
+      }
     }
   }
   
   // Saying the actual note: A, B, C osv...
-//  var noteAnswer = new Note(answer);
-
-  // checking if the trombone slider is correct:
-  if( gCorrectAnswer.isNote(answer) ){
-    //gTrombone.doesNoteAndPositionMatch(gCurrectAnswer, answer) )
-    document.querySelector('#nrCorrect').innerHTML++;
-    return randomNote();
+  if(document.getElementById('radChord').checked){
+    if(gCorrectAnswer.hasNote(new Note(answer))){
+      gCurrentAnswer.push(answer);
+    } else {
+      document.querySelector('#nrError').innerHTML++;
+    }
+    if(gCorrectAnswer.is(gCurrentAnswer)){
+      document.querySelector('#nrCorrect').innerHTML++;
+      return randomNote();
+    }
+  } else {
+    if( gCorrectAnswer.isNote(answer) ){
+      //gTrombone.doesNoteAndPositionMatch(gCurrectAnswer, answer) )
+      document.querySelector('#nrCorrect').innerHTML++;
+      return randomNote();
+    }
+  
+    document.querySelector('#nrError').innerHTML++;
   }
-
-  document.querySelector('#nrError').innerHTML++;
 }
 
 
 function randomNote(){
-  var randPos;
-  
-  var lowFreq = parseInt(document.querySelector('#lowBoundSelect').value);
-  var highFreq = parseInt(document.querySelector('#highBoundSelect').value);
-  do{
-    randFreq = lowFreq + Math.floor(Math.random()* (highFreq - lowFreq) );
-  } while(randFreq == gCorrectAnswer.frequency );
-  
-  setNote( new Note(randFreq) );
+  // if Chord practice:
+  if(document.getElementById('radChord').checked){
+    var chordPos = Math.floor(Math.random()* (gaChords.length) );
+    setChorde(gaChords[chordPos]);
+  } else {
+    
+    var lowFreq = parseInt(document.querySelector('#lowBoundSelect').value);
+    var highFreq = parseInt(document.querySelector('#highBoundSelect').value);
+    do{
+      randFreq = lowFreq + Math.floor(Math.random()* (highFreq - lowFreq) );
+    } while(randFreq == gCorrectAnswer.frequency );
+    
+    setNote( new Note(randFreq) );
+  }
 }
 
 
 function setChorde(chord){
-  var chordPos = gaChord.indexOf(chord);
+  var chordPos = gaChords.indexOf(chord);
   if(chordPos == -1)
     return;
     
@@ -223,11 +288,7 @@ function setChorde(chord){
   var noteLineDown = svgDoc.getElementById("noteLineDown");
   
   var note = svgDoc.getElementById("note");
-  var threeOver = svgDoc.getElementById("threeOver");
-  var twoOver = svgDoc.getElementById("twoOver");
-  var oneOver = svgDoc.getElementById("oneOver");
-  var oneUnder = svgDoc.getElementById("oneUnder");
-  var twoUnder = svgDoc.getElementById("twoUnder");
+
   var chordLetter = svgDoc.getElementById("chordLetter");
  
   resetNote();
@@ -235,7 +296,9 @@ function setChorde(chord){
   
   chordLetter.setAttribute("display", "");
   
-  chordLetter.textContent = chord;
+  chordLetter.textContent = chord.getName();
+  gCurrentAnswer.length = 0;
+  gCorrectAnswer = chord;
 }
 
 function setNote(oNote){
@@ -258,7 +321,12 @@ function setNote(oNote){
   var oneOver = svgDoc.getElementById("oneOver");
   var oneUnder = svgDoc.getElementById("oneUnder");
   var twoUnder = svgDoc.getElementById("twoUnder");
+  var chordLetter = svgDoc.getElementById("chordLetter");
  
+ 
+  chordLetter.setAttribute("display", "none");
+  note.setAttribute("display", '');
+  
   resetNote();
 
   var y = 0; //noteYValue
@@ -335,6 +403,7 @@ function setNote(oNote){
 
 
 function resetNote(){
+  gCurrentAnswer.length = 0;
   
   var svg = document.getElementById("sheet");
   var svgDoc = svg.contentDocument;
@@ -421,6 +490,12 @@ window.onload = function() {
   document.getElementById('gClefButton').addEventListener('click', setGClef);
   document.getElementById('fClefButton').addEventListener('click', setFClef);
   
+  
+  var aElements = document.querySelectorAll('.radMode');
+  for(var i=0; i<aElements.length; i++){
+    aElements[i].addEventListener('click', randomNote, false);
+  }
+
   
   /*  why o why does not this work?
     $('.shareClass').click(function(){
