@@ -507,6 +507,35 @@ function setBluesFChords(){
   makeChordArray();
 }
 
+function set4MostCommon(){
+  
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    /**/ if(gaChords[i].name == "G") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "F") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "C") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Am") aChords[i].children[0].checked = true;
+    else aChords[i].children[0].checked = false;
+  }
+  makeChordArray();
+}
+function set8MostCommon(){
+  
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    /**/ if(gaChords[i].name == "G") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "F") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "C") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Am") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Dm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Em") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "E") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "D") aChords[i].children[0].checked = true;
+    else aChords[i].children[0].checked = false;
+  }
+  makeChordArray();
+}
+
 function setCommonPianoChords(){
   var aChords = document.getElementById('chordPicker').children;
   for(var i=0; i<aChords.length; i++){
@@ -600,6 +629,12 @@ function listenForChordsPreset(){
     .addEventListener('click', setCommonPianoChords);
   document.getElementById('setCommonGuitarChords').
     addEventListener('click', setCommonGuitarChords);
+  document.getElementById('set4MostCommon').
+    addEventListener('click', set4MostCommon);
+  document.getElementById('set8MostCommon').
+    addEventListener('click', set8MostCommon);
+    
+//    set4MostCommon
 }
 
 window.onload = function() {
