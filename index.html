@@ -45,12 +45,6 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       id="fClefButton"
       type="button"
       value="f-Clef" />
-<!--
-    <input
-      id="fhordButton"
-      type="button"
-      value="Chord" />
--->
   </div>
   <div>
     <label>
@@ -60,7 +54,7 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       <input id="radChord" class="radMode" type="radio" name="mode" value="chord"/>Chords
     </label>
   </div>
-  <div id="notePicker">
+  <div class="noteRelated">
     <p>
       Lowest possible note:
       <select id="lowBoundSelect">
@@ -89,15 +83,31 @@ along with Noppi.  If not, see <http://www.gnu.org/licenses/>.
       </select>
     </p>
   </div>
-  <div id="chordPicker">
+  <div id="chordPicker" class="chordRelated">
   </div>
-  <div>
+  <div class="chordRelated">
+    <span>Presets:</span>
+    <input type="button" id="setAllChords" value="All"/>
+    <input type="button" id="setBluesFChords" value="Blues-F"/>
+    <input type="button" id="setCommonPianoChords" value="Common Piano"/>
+    <input type="button" id="setCommonGuitarChords" value="Common Guitar"/>
+  </div>
+  <div class="noteRelated">
     <p>
-      Type the letter of the tone shown, use Shift for Major and Alt for minor.
+      Type the letter of the tone shown, use Shift for major and Alt for minor.
     </p>
     <p>
       You can also hit the number corresponding to the correct 
-      trombone slide position (this feature does not with chords).
+      trombone slide position.
+    </p>
+  </div>
+  <div class="chordRelated">
+    <p>
+      Type all the notes in the chord shown, 
+      use Shift for major and Alt for minor.
+    </p>
+    <p>
+      You can not use trombone-slider position with the chord practice
     </p>
   </div>
 </body>

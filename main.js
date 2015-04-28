@@ -174,6 +174,7 @@ var gaChords = [
   new Chord('Eb', [new Note('Eb'), new Note('F#'), new Note('A#')] ),
   new Chord('Ebm', [new Note('Eb'), new Note('F'), new Note('A#')] ),
   new Chord('F', [new Note('F'), new Note('A'), new Note('C')] ),
+  new Chord('Fm', [new Note('F'), new Note('G#'), new Note('C')] ),
   new Chord('G', [new Note('G'), new Note('B'), new Note('D')] ),
   new Chord('Gm', [new Note('G'), new Note('Bb'), new Note('D')] )
 ];
@@ -259,27 +260,20 @@ function checkAnswer(/* int or char */ answer){
 
 
 function randomNote(){
-  // if Chord practice:
-  if(document.getElementById('radChord').checked){
-/*
+
+  if(document.getElementById('radChord').checked){  // if Chord practice:
     var randChordPos;
-    
     do{
       randChordPos = Math.floor(Math.random()* (gaCurrentChords.length) );
-    }while(gaCurrentChords[randChordPos] == gCorrectAnswer);
-*/
-    // fixa så att man inte kan få samma acord i rad....
-    
-    var chordPos = Math.floor(Math.random()* (gaCurrentChords.length) );
-    setChorde(gaCurrentChords[chordPos]);
-  } else {
+    }while(gaCurrentChords[randChordPos].name == gCorrectAnswer.name);
+    setChorde(gaCurrentChords[randChordPos]);
+  } else { // else note practice:
     var randFreq;
     var lowFreq = parseInt(document.querySelector('#lowBoundSelect').value);
     var highFreq = parseInt(document.querySelector('#highBoundSelect').value);
     do{
       randFreq = lowFreq + Math.floor(Math.random()* (highFreq - lowFreq) );
     } while(randFreq == gCorrectAnswer.frequency );
-    
     setNote( new Note(randFreq) );
   }
 }
@@ -461,6 +455,7 @@ function makeChordArray(){
   }
   
   gaCurrentChords = chords;
+  randomNote();
   
 }
 
@@ -479,13 +474,74 @@ function fillChords(){
 }
 
 function showHideChords(){
+  var aNotes, aChords, i;
   if(document.getElementById('radChord').checked){
-    document.getElementById('notePicker').style.display = "none";
-    document.getElementById('chordPicker').style.display = "";
+    aNotes = document.querySelectorAll('.noteRelated');
+    aChords = document.querySelectorAll('.chordRelated');
+    for(i=0; i<aNotes.length; i++){aNotes[i].style.display = "none";}
+    for(i=0; i<aChords.length; i++){aChords[i].style.display = "";}
   } else {
-    document.getElementById('notePicker').style.display = "";
-    document.getElementById('chordPicker').style.display = "none";
+    aNotes = document.querySelectorAll('.noteRelated');
+    aChords = document.querySelectorAll('.chordRelated');
+    for(i=0; i<aNotes.length; i++){aNotes[i].style.display = "";}
+    for(i=0; i<aChords.length; i++){aChords[i].style.display = "none";}
   }
+}
+
+function setAllChords(){
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    aChords[i].children[0].checked = true;
+  }
+  makeChordArray();
+}
+
+function setBluesFChords(){
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    /**/ if(gaChords[i].name == "F") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Bb") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "C") aChords[i].children[0].checked = true;
+    else aChords[i].children[0].checked = false;
+  }
+  makeChordArray();
+}
+
+function setCommonPianoChords(){
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    /**/ if(gaChords[i].name == "C") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Cm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "D") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Dm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "E") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Em") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "F") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Fm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "G") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Gm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "A") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Am") aChords[i].children[0].checked = true;
+    else aChords[i].children[0].checked = false;
+  }
+  makeChordArray();
+}
+function setCommonGuitarChords(){
+  var aChords = document.getElementById('chordPicker').children;
+  for(var i=0; i<aChords.length; i++){
+    /**/ if(gaChords[i].name == "A") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Am") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "C") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "D") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Dm") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "D7") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "E") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "Em") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "F") aChords[i].children[0].checked = true;
+    else if(gaChords[i].name == "G") aChords[i].children[0].checked = true;
+    else aChords[i].children[0].checked = false;
+  }
+  makeChordArray();
 }
 
 
@@ -535,12 +591,24 @@ switch(event.keyCode){
   }// end switch
 }
 
+function listenForChordsPreset(){
+  document.getElementById('setAllChords')
+    .addEventListener('click', setAllChords);
+  document.getElementById('setBluesFChords')
+    .addEventListener('click', setBluesFChords);
+  document.getElementById('setCommonPianoChords')
+    .addEventListener('click', setCommonPianoChords);
+  document.getElementById('setCommonGuitarChords').
+    addEventListener('click', setCommonGuitarChords);
+}
+
 window.onload = function() {
   randomNote();
   fillChords();
   showHideChords();
   makeChordArray();
   setGClef();
+  listenForChordsPreset();
   document.addEventListener('keydown', keyboardKeydown);
   document.getElementById('gClefButton').addEventListener('click', setGClef);
   document.getElementById('fClefButton').addEventListener('click', setFClef);
